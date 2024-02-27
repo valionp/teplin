@@ -1,12 +1,1 @@
-{
-    "sections": {
-      "277d4f76-65ea-4cfd-a637-15557b812d68": {
-        "type": "banner",
-        "settings": {
-        }
-      }
-    },
-    "order": [
-      "277d4f76-65ea-4cfd-a637-15557b812d68"
-    ]
-  }
+{"sections":{"cart-items":{"type":"main-cart-items","settings":{"color_scheme":"scheme-1","padding_top":36,"padding_bottom":36}},"cart-footer":{"type":"main-cart-footer","blocks":{"subtotal":{"type":"subtotal","settings":{}},"buttons":{"type":"buttons","settings":{}}},"block_order":["subtotal","buttons"],"settings":{"color_scheme":"scheme-1","padding_top":20,"padding_bottom":40}}},"order":["cart-items","cart-footer"]}
