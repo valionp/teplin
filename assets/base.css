@@ -3463,10 +3463,6 @@ details-disclosure > details {
     z-index: 2;
   }
 
-  :root {
-    --easter-egg: none;
-    --sparkle: url('./sparkle.gif');
-  }
 
   .animate--hover-vertical-lift .button:not(.button--tertiary),
   .animate--hover-vertical-lift .shopify-challenge__button,
