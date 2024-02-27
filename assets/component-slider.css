@@ -51,19 +51,16 @@ slider-component.slider-component-full-width {
     -webkit-overflow-scrolling: touch;
     margin-bottom: 1rem;
   }
-
   /* Fix to show some space at the end of our sliders in all browsers */
   .slider--mobile:after {
     content: "";
     width: 0;
     padding-left: 1.5rem;
   }
-
   .slider.slider--mobile.contains-card--standard
     .slider__slide:not(.collection-list__item--no-media) {
     padding-bottom: var(--focus-outline-padding);
   }
-
   .slider.slider--mobile.contains-content-container .slider__slide {
     --focus-outline-padding: 0rem;
   }
@@ -79,7 +76,6 @@ slider-component.slider-component-full-width {
     scroll-padding-left: 1rem;
     -webkit-overflow-scrolling: touch;
   }
-
   .slider.slider--tablet-up .slider__slide {
     margin-bottom: 0;
   }
@@ -96,7 +92,6 @@ slider-component.slider-component-full-width {
     -webkit-overflow-scrolling: touch;
     margin-bottom: 1rem;
   }
-
   /* Fix to show some space at the end of our sliders in all browsers */
   .slider--tablet:after {
     content: "";
@@ -104,12 +99,10 @@ slider-component.slider-component-full-width {
     padding-left: 1.5rem;
     margin-left: calc(-1 * var(--grid-desktop-horizontal-spacing));
   }
-
   .slider.slider--tablet.contains-card--standard
     .slider__slide:not(.collection-list__item--no-media) {
     padding-bottom: var(--focus-outline-padding);
   }
-
   .slider.slider--tablet.contains-content-container .slider__slide {
     --focus-outline-padding: 0rem;
   }
@@ -134,7 +127,6 @@ slider-component.slider-component-full-width {
   .slider-component-desktop.page-width {
     max-width: none;
   }
-
   .slider--desktop {
     position: relative;
     flex-wrap: inherit;
@@ -145,7 +137,6 @@ slider-component.slider-component-full-width {
     margin-bottom: 1rem;
     scroll-padding-left: var(--desktop-margin-left-first-item);
   }
-
   /* Fix to show some space at the end of our sliders in all browsers */
   .slider--desktop:after {
     content: "";
@@ -153,66 +144,55 @@ slider-component.slider-component-full-width {
     padding-left: 5rem;
     margin-left: calc(-1 * var(--grid-desktop-horizontal-spacing));
   }
-
   .slider--desktop .slider__slide:first-child {
     margin-left: var(--desktop-margin-left-first-item);
     scroll-margin-left: var(--desktop-margin-left-first-item);
   }
-
   .slider-component-full-width .slider--desktop {
     scroll-padding-left: 1.5rem;
   }
-
   .slider-component-full-width .slider--desktop .slider__slide:first-child {
     margin-left: 1.5rem;
     scroll-margin-left: 1.5rem;
   }
-
   /* Fix to show some space at the end of our sliders in all browsers */
   .slider-component-full-width .slider--desktop:after {
     padding-left: 1.5rem;
   }
-
   .slider--desktop.grid--5-col-desktop .grid__item {
     width: calc(
       (100% - var(--desktop-margin-left-first-item)) / 5 -
         var(--grid-desktop-horizontal-spacing) * 2
     );
   }
-
   .slider--desktop.grid--4-col-desktop .grid__item {
     width: calc(
       (100% - var(--desktop-margin-left-first-item)) / 4 -
         var(--grid-desktop-horizontal-spacing) * 3
     );
   }
-
   .slider--desktop.grid--3-col-desktop .grid__item {
     width: calc(
       (100% - var(--desktop-margin-left-first-item)) / 3 -
         var(--grid-desktop-horizontal-spacing) * 4
     );
   }
-
   .slider--desktop.grid--2-col-desktop .grid__item {
     width: calc(
       (100% - var(--desktop-margin-left-first-item)) / 2 -
         var(--grid-desktop-horizontal-spacing) * 5
     );
   }
-
   .slider--desktop.grid--1-col-desktop .grid__item {
     width: calc(
       (100% - var(--desktop-margin-left-first-item)) -
         var(--grid-desktop-horizontal-spacing) * 9
     );
   }
-
   .slider.slider--desktop.contains-card--standard
     .slider__slide:not(.collection-list__item--no-media) {
     padding-bottom: var(--focus-outline-padding);
   }
-
   .slider.slider--desktop.contains-content-container .slider__slide {
     --focus-outline-padding: 0rem;
   }
@@ -225,7 +205,6 @@ slider-component.slider-component-full-width {
 }
 
 /* Scrollbar */
-
 .slider {
   scrollbar-color: RGB(var(--color-foreground))
     RGBA(var(--color-foreground), 0.04);

@@ -60,7 +60,6 @@
 .visual-display-parent.disabled .visual-display::after {
   display: block;
   content: "";
-
   /* 1.414 is not a magic number, it's the square root of 2, or the length of the diagonal */
   width: calc(var(--visual-display__size) * 1.414);
   border-bottom: 0.1rem solid RGB(var(--color-background-contrast));

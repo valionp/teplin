@@ -104,11 +104,9 @@
   .article-card__image--small .ratio::before {
     padding-bottom: 14.3rem;
   }
-
   .article-card__image--medium .ratio::before {
     padding-bottom: 21.9rem;
   }
-
   .article-card__image--large .ratio::before {
     padding-bottom: 27.5rem;
   }
@@ -118,11 +116,9 @@
   .article-card__image--small .ratio::before {
     padding-bottom: 17.7rem;
   }
-
   .article-card__image--medium .ratio::before {
     padding-bottom: 30.7rem;
   }
-
   .article-card__image--large .ratio::before {
     padding-bottom: 40.7rem;
   }
