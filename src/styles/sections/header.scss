@@ -1,0 +1,48 @@
+@import "../helpers/helpers";
+
+.header {
+  .list-menu__item:not(.dropdown-link) {
+    padding-right: 2.7rem;
+    padding-bottom: 46px;
+    margin-bottom: -46px;
+
+    @include media(990px) {
+      padding-bottom: 1.1rem;
+      margin-bottom: 0;
+    }
+  }
+
+  header-drawer {
+    .menu-drawer__navigation {
+      .list-menu--disclosure {
+        position: static;
+        min-width: 100%;
+        width: 100%;
+        border: none;
+        box-shadow: none;
+      }
+
+      .header__submenu {
+        padding-left: 10px;
+      }
+
+      .drawer-submenu-title {
+        font-weight: 700;
+
+        & + ul {
+          margin-bottom: 10px;
+
+          li:last-child {
+            margin-top: 5px;
+            font-style: italic;
+
+            a {
+              justify-content: flex-start;
+              gap: 5px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

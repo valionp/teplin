@@ -1,5 +1,5 @@
 {
-  "name": "learn-webpack",
+  "name": "shopify-theme",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -41,14 +41,7 @@
     }
   },
   "dependencies": {
-    "@fancyapps/fancybox": "^3.5.7",
-    "blazy": "^1.8.2",
-    "font-awesome": "^4.7.0",
-    "jquery": "^3.6.0",
-    "lazysizes": "^5.3.2",
     "node-sass": "^7.0.3",
-    "rivets": "^0.9.6",
-    "shopify-cartjs": "^1.1.0",
     "swiper": "^6.8.4"
   }
 }

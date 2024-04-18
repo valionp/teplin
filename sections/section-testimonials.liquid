@@ -1,0 +1,203 @@
+{{ 'section-testimonials.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+  padding-top: {{ section.settings.padding_top | times: 0.5 | round: 0 }}px;
+  padding-bottom: {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+  .section-{{ section.id }}-padding {
+  padding-top: {{ section.settings.padding_top }}px;
+  padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} isolate gradient">
+  <div class="testimonials section-{{ section.id }}-padding">
+    {% if section.settings.title != blank %}
+      <h2
+        class="testimonials__title page-width {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+        {{ section.settings.title }}
+      </h2>
+    {% endif %}
+
+    <div class="testimonials__slider swiper">
+      <div class="swiper-wrapper">
+        {%- for block in section.blocks -%}
+          <div class="slide swiper-slide" {{ block.shopify_attributes }}>
+            <div
+              class="testimonials__block color-{{ section.settings.color_scheme-block }} isolate gradient {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}" {% if settings.animations_reveal_on_scroll %}
+              data-cascade
+              style="--animation-order: {{ forloop.index }};"
+              {% endif %}>
+              <div class="testimonials__block-stars-wrapper">
+                <div class="testimonials__block-stars">
+                  {% for i in (1..block.settings.stars) %}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
+                      <path
+                        d="M15.1608 7.65184L12.3514 10.1037L13.193 13.7542C13.2375 13.945 13.2248 14.1448 13.1564 14.3284C13.0881 14.5121 12.9671 14.6715 12.8086 14.7868C12.6501 14.902 12.4612 14.968 12.2654 14.9765C12.0696 14.985 11.8757 14.9355 11.7079 14.8344L8.524 12.9033L5.34698 14.8344C5.17914 14.9355 4.98521 14.985 4.78943 14.9765C4.59365 14.968 4.40471 14.902 4.24624 14.7868C4.08776 14.6715 3.96678 14.5121 3.89842 14.3284C3.83006 14.1448 3.81735 13.945 3.86188 13.7542L4.70223 10.1075L1.89213 7.65184C1.74351 7.52365 1.63603 7.35443 1.58319 7.16541C1.53035 6.97638 1.53449 6.77597 1.5951 6.58929C1.6557 6.40261 1.77008 6.23798 1.92388 6.11604C2.07768 5.9941 2.26405 5.92029 2.45964 5.90386L6.16366 5.58304L7.60951 2.13442C7.68502 1.95347 7.81237 1.7989 7.97555 1.69017C8.13872 1.58145 8.33041 1.52344 8.52649 1.52344C8.72256 1.52344 8.91426 1.58145 9.07743 1.69017C9.2406 1.7989 9.36796 1.95347 9.44346 2.13442L10.8937 5.58304L14.5965 5.90386C14.792 5.92029 14.9784 5.9941 15.1322 6.11604C15.286 6.23798 15.4004 6.40261 15.461 6.58929C15.5216 6.77597 15.5257 6.97638 15.4729 7.16541C15.4201 7.35443 15.3126 7.52365 15.164 7.65184H15.1608Z"
+                        fill="#F6CB33"/>
+                    </svg>
+                  {% endfor %}
+                </div>
+                <div class="testimonials__block-date">{{ block.settings.date }}</div>
+              </div>
+
+              <div class="testimonials__block-excerpt">{{ block.settings.excerpt }}</div>
+
+              <div class="testimonials__block-content">{{ block.settings.content }}</div>
+
+              <div class="testimonials__block-heading-wrapper">
+                <div class="testimonials__block-avatar-wrapper">
+                  {%- if block.settings.avatar != blank -%}
+                    {{ block.settings.avatar | image_url: width: 200 | image_tag: loading: 'lazy', width: 64, height: 64 }}
+                  {%- endif -%}
+
+                  <div class="testimonials__block-info-wrapper">
+                    <div class="testimonials__block-name">{{ block.settings.name }}</div>
+                    <div class="testimonials__block-from">{{ block.settings.from }}</div>
+                  </div>
+                </div>
+                <div class="testimonials__block-verified-wrapper">
+                  <div class="testimonials__block-verified">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
+                      <path
+                        d="M10.0501 18.0001L4.3501 12.3001L5.7751 10.8751L10.0501 15.1501L19.2251 5.9751L20.6501 7.4001L10.0501 18.0001Z"
+                        fill="currentColor"/>
+                    </svg>
+                    Verified customer
+                  </div>
+                  {%- if block.settings.credentials != blank %}
+                    <div class="testimonials__credentials">
+                      {{ block.settings.credentials }}
+                    </div>
+                  {% endif -%}
+                </div>
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+      <div class="slider__controls">
+        <div class="slider__pagination"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme-block",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-3"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Author image"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Author Name"
+        },
+        {
+          "type": "text",
+          "id": "from",
+          "label": "Author Location",
+          "default": "🇺🇸 Virginia"
+        },
+        {
+          "type": "text",
+          "id": "date",
+          "label": "Date of review"
+        },
+        {
+          "type": "text",
+          "id": "credentials",
+          "label": "Author Position"
+        },
+        {
+          "type": "text",
+          "id": "excerpt",
+          "label": "Title of review"
+        },
+        {
+          "type": "text",
+          "id": "content",
+          "label": "Content of review"
+        },
+        {
+          "type": "range",
+          "id": "stars",
+          "label": "Stars",
+          "default": 5,
+          "min": 1,
+          "max": 5,
+          "step": 1
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials"
+    }
+  ]
+}
+{% endschema %}

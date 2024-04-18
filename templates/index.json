@@ -1,1 +1,181 @@
-{"sections":{"image_banner":{"type":"image-banner","blocks":{"heading":{"type":"heading","settings":{"heading":"Browse our latest products","heading_size":"h0"}},"button":{"type":"buttons","settings":{"button_label_1":"Shop all","button_link_1":"shopify:\/\/collections\/all","button_style_secondary_1":true,"button_label_2":"","button_link_2":"","button_style_secondary_2":false}}},"block_order":["heading","button"],"settings":{"image_overlay_opacity":40,"image_height":"large","desktop_content_position":"bottom-center","show_text_box":false,"desktop_content_alignment":"center","color_scheme":"scheme-3","image_behavior":"none","mobile_content_alignment":"center","stack_images_on_mobile":false,"show_text_below":false}},"featured_collection":{"type":"featured-collection","settings":{"title":"Featured products","heading_size":"h2","description":"","show_description":false,"description_style":"body","collection":"all","products_to_show":8,"columns_desktop":4,"full_width":false,"show_view_all":true,"view_all_style":"solid","enable_desktop_slider":false,"color_scheme":"scheme-1","image_ratio":"adapt","image_shape":"default","show_secondary_image":true,"show_vendor":false,"show_rating":false,"enable_quick_add":false,"columns_mobile":"2","swipe_on_mobile":false,"padding_top":44,"padding_bottom":36}}},"order":["image_banner","featured_collection"]}
+{
+  "sections": {
+    "image_banner": {
+      "type": "image-banner",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Browse our latest products",
+            "heading_size": "h0"
+          }
+        },
+        "button": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Shop all",
+            "button_link_1": "shopify://collections/all",
+            "button_style_secondary_1": true,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": ["heading", "button"],
+      "settings": {
+        "image_overlay_opacity": 40,
+        "image_height": "large",
+        "desktop_content_position": "bottom-center",
+        "show_text_box": false,
+        "desktop_content_alignment": "center",
+        "color_scheme": "scheme-3",
+        "image_behavior": "none",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": false,
+        "show_text_below": false
+      }
+    },
+    "section_featured_products_VbwJef": {
+      "type": "section-featured-products",
+      "blocks": {
+        "product_4WQEU6": {
+          "type": "product",
+          "settings": {
+            "product": "cloudburst-gel-hydrator",
+            "stars-num": 4,
+            "reviews-text": "<p>15 reviews</p>"
+          }
+        },
+        "product_Jzqr66": {
+          "type": "product",
+          "settings": {
+            "product": "sunstone-hair-elixir",
+            "stars-num": 4,
+            "reviews-text": "<p>15 reviews</p>"
+          }
+        },
+        "product_aBjBHi": {
+          "type": "product",
+          "settings": {
+            "product": "love-your-body-collection",
+            "stars-num": 4,
+            "reviews-text": "<p>15 reviews</p>"
+          }
+        },
+        "product_K8e3xH": {
+          "type": "product",
+          "settings": {
+            "product": "superbloom-palette",
+            "stars-num": 4,
+            "reviews-text": "<p>15 reviews</p>"
+          }
+        }
+      },
+      "block_order": [
+        "product_4WQEU6",
+        "product_Jzqr66",
+        "product_aBjBHi",
+        "product_K8e3xH"
+      ],
+      "settings": {
+        "title": "Shop the Marketplace",
+        "subtitle": "<p>We go out of our way to source products that are vegan, cruelty-free and free from most common toxins.</p>",
+        "btt-text": "Shop All",
+        "btt-link": "shopify://collections/frontpage",
+        "color_scheme": "",
+        "padding_top": 152,
+        "padding_bottom": 112
+      }
+    },
+    "section_testimonials_BEkwAM": {
+      "type": "section-testimonials",
+      "blocks": {
+        "testimonial_VdDjN4": {
+          "type": "testimonial",
+          "settings": {
+            "avatar": "shopify://shop_images/inspired-woman_925x_d09cedb6-43d7-4eb3-af0d-5fd99a469ea0.jpg",
+            "name": "Author",
+            "from": "🇺🇸 New York",
+            "date": "11, Sep 2023",
+            "credentials": "Manager",
+            "excerpt": "\"Would definitely recommend to anyone wanting to improve their health.\"",
+            "content": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"",
+            "stars": 5
+          }
+        },
+        "testimonial_LaWg6z": {
+          "type": "testimonial",
+          "settings": {
+            "avatar": "shopify://shop_images/girl2.webp",
+            "name": "Author",
+            "from": "🇺🇸 Virginia",
+            "date": "09, Sep 2023",
+            "credentials": "Designer",
+            "excerpt": "\"Would definitely recommend to anyone wanting to improve their health.\"",
+            "content": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"",
+            "stars": 3
+          }
+        },
+        "testimonial_DYwVD3": {
+          "type": "testimonial",
+          "settings": {
+            "avatar": "shopify://shop_images/man.webp",
+            "name": "Author 2",
+            "from": "🇺🇸 California",
+            "date": "10, Sep 2023",
+            "credentials": "Developer",
+            "excerpt": "\"Would definitely recommend to anyone wanting to improve their putting.\"",
+            "content": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"",
+            "stars": 5
+          }
+        },
+        "testimonial_3TEgVT": {
+          "type": "testimonial",
+          "settings": {
+            "avatar": "shopify://shop_images/Frame25_3.png",
+            "name": "Test name",
+            "from": "London",
+            "date": "12, Sep 2023",
+            "credentials": "CEO",
+            "excerpt": "\"Would definitely recommend to anyone wanting to improve their putting.\"",
+            "content": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"",
+            "stars": 5
+          }
+        },
+        "testimonial_aJAKWn": {
+          "type": "testimonial",
+          "settings": {
+            "avatar": "shopify://shop_images/Frame25.png",
+            "name": "Testimonial",
+            "from": "🇺🇸 Chicago",
+            "date": "13, Sep 2023",
+            "credentials": "CTO",
+            "excerpt": "\"Would definitely recommend to anyone wanting to improve their putting.\"",
+            "content": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"",
+            "stars": 5
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_VdDjN4",
+        "testimonial_LaWg6z",
+        "testimonial_DYwVD3",
+        "testimonial_3TEgVT",
+        "testimonial_aJAKWn"
+      ],
+      "settings": {
+        "title": "Testimonials section",
+        "color_scheme": "scheme-2",
+        "color_scheme-block": "",
+        "padding_top": 152,
+        "padding_bottom": 100
+      }
+    }
+  },
+  "order": [
+    "image_banner",
+    "section_featured_products_VbwJef",
+    "section_testimonials_BEkwAM"
+  ]
+}

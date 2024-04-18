@@ -1,35 +1,101 @@
-/*
- * ATTENTION: An "eval-source-map" devtool has been used.
- * This devtool is neither made for production nor for readable output files.
- * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
- * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
- * or disable the default devtool with "devtool: false".
- * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
- */
-/******/ (() => {
-  // webpackBootstrap
-  /******/ var __webpack_modules__ = {
-    /***/ "./src/js/components/price-per-item.js":
-      /*!*********************************************!*\
-  !*** ./src/js/components/price-per-item.js ***!
-  \*********************************************/
-      /***/ () => {
-        eval(
-          "if (!customElements.get('price-per-item')) {\n  customElements.define(\n    'price-per-item',\n    class PricePerItem extends HTMLElement {\n      constructor() {\n        super();\n        this.variantId = this.dataset.variantId;\n        this.input = document.getElementById(`Quantity-${this.dataset.sectionId || this.dataset.variantId}`);\n        if (this.input) {\n          this.input.addEventListener('change', this.onInputChange.bind(this));\n        }\n\n        this.getVolumePricingArray();\n      }\n\n      updatePricePerItemUnsubscriber = undefined;\n      variantIdChangedUnsubscriber = undefined;\n\n      connectedCallback() {\n        // Update variantId if variant is switched on product page\n        this.variantIdChangedUnsubscriber = subscribe(PUB_SUB_EVENTS.variantChange, (event) => {\n          this.variantId = event.data.variant.id.toString();\n          this.getVolumePricingArray();\n        });\n\n        this.updatePricePerItemUnsubscriber = subscribe(PUB_SUB_EVENTS.cartUpdate, (response) => {\n          if (!response.cartData) return;\n\n          // Item was added to cart via product page\n          if (response.cartData['variant_id'] !== undefined) {\n            if (response.productVariantId === this.variantId) this.updatePricePerItem(response.cartData.quantity);\n            // Qty was updated in cart\n          } else if (response.cartData.item_count !== 0) {\n            const isVariant = response.cartData.items.find((item) => item.variant_id.toString() === this.variantId);\n            if (isVariant && isVariant.id.toString() === this.variantId) {\n              // The variant is still in cart\n              this.updatePricePerItem(isVariant.quantity);\n            } else {\n              // The variant was removed from cart, qty is 0\n              this.updatePricePerItem(0);\n            }\n            // All items were removed from cart\n          } else {\n            this.updatePricePerItem(0);\n          }\n        });\n      }\n\n      disconnectedCallback() {\n        if (this.updatePricePerItemUnsubscriber) {\n          this.updatePricePerItemUnsubscriber();\n        }\n        if (this.variantIdChangedUnsubscriber) {\n          this.variantIdChangedUnsubscriber();\n        }\n      }\n\n      onInputChange() {\n        this.updatePricePerItem();\n      }\n\n      updatePricePerItem(updatedCartQuantity) {\n        if (this.input) {\n          this.enteredQty = parseInt(this.input.value);\n          this.step = parseInt(this.input.step)\n        }\n\n        // updatedCartQuantity is undefined when qty is updated on product page. We need to sum entered qty and current qty in cart.\n        // updatedCartQuantity is not undefined when qty is updated in cart. We need to sum qty in cart and min qty for product.\n        this.currentQtyForVolumePricing = updatedCartQuantity === undefined ? this.getCartQuantity(updatedCartQuantity) + this.enteredQty : this.getCartQuantity(updatedCartQuantity) + parseInt(this.step);\n\n        if (this.classList.contains('variant-item__price-per-item')) {\n          this.currentQtyForVolumePricing = this.getCartQuantity(updatedCartQuantity);\n        }\n        for (let pair of this.qtyPricePairs) {\n          if (this.currentQtyForVolumePricing >= pair[0]) {\n            const pricePerItemCurrent = document.querySelector(`price-per-item[id^=\"Price-Per-Item-${this.dataset.sectionId || this.dataset.variantId}\"] .price-per-item span`);\n            this.classList.contains('variant-item__price-per-item') ? pricePerItemCurrent.innerHTML = window.quickOrderListStrings.each.replace('[money]', pair[1]) : pricePerItemCurrent.innerHTML = pair[1];\n            break;\n          }\n        }\n      }\n\n      getCartQuantity(updatedCartQuantity) {\n        return (updatedCartQuantity || updatedCartQuantity === 0) ? updatedCartQuantity : parseInt(this.input.dataset.cartQuantity);\n      }\n\n      getVolumePricingArray() {\n        const volumePricing = document.getElementById(`Volume-${this.dataset.sectionId || this.dataset.variantId}`);\n        this.qtyPricePairs = [];\n\n        if (volumePricing) {\n          volumePricing.querySelectorAll('li').forEach(li => {\n            const qty = parseInt(li.querySelector('span:first-child').textContent);\n            const price = (li.querySelector('span:not(:first-child):last-child').dataset.text);\n            this.qtyPricePairs.push([qty, price]);\n          });\n        }\n        this.qtyPricePairs.reverse();\n      }\n    }\n  );\n}\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvanMvY29tcG9uZW50cy9wcmljZS1wZXItaXRlbS5qcy5qcyIsIm1hcHBpbmdzIjoiQUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQSIsInNvdXJjZXMiOlsid2VicGFjazovL2xlYXJuLXdlYnBhY2svLi9zcmMvanMvY29tcG9uZW50cy9wcmljZS1wZXItaXRlbS5qcz85ZjU5Il0sInNvdXJjZXNDb250ZW50IjpbImlmICghY3VzdG9tRWxlbWVudHMuZ2V0KCdwcmljZS1wZXItaXRlbScpKSB7XG4gIGN1c3RvbUVsZW1lbnRzLmRlZmluZShcbiAgICAncHJpY2UtcGVyLWl0ZW0nLFxuICAgIGNsYXNzIFByaWNlUGVySXRlbSBleHRlbmRzIEhUTUxFbGVtZW50IHtcbiAgICAgIGNvbnN0cnVjdG9yKCkge1xuICAgICAgICBzdXBlcigpO1xuICAgICAgICB0aGlzLnZhcmlhbnRJZCA9IHRoaXMuZGF0YXNldC52YXJpYW50SWQ7XG4gICAgICAgIHRoaXMuaW5wdXQgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChgUXVhbnRpdHktJHt0aGlzLmRhdGFzZXQuc2VjdGlvbklkIHx8IHRoaXMuZGF0YXNldC52YXJpYW50SWR9YCk7XG4gICAgICAgIGlmICh0aGlzLmlucHV0KSB7XG4gICAgICAgICAgdGhpcy5pbnB1dC5hZGRFdmVudExpc3RlbmVyKCdjaGFuZ2UnLCB0aGlzLm9uSW5wdXRDaGFuZ2UuYmluZCh0aGlzKSk7XG4gICAgICAgIH1cblxuICAgICAgICB0aGlzLmdldFZvbHVtZVByaWNpbmdBcnJheSgpO1xuICAgICAgfVxuXG4gICAgICB1cGRhdGVQcmljZVBlckl0ZW1VbnN1YnNjcmliZXIgPSB1bmRlZmluZWQ7XG4gICAgICB2YXJpYW50SWRDaGFuZ2VkVW5zdWJzY3JpYmVyID0gdW5kZWZpbmVkO1xuXG4gICAgICBjb25uZWN0ZWRDYWxsYmFjaygpIHtcbiAgICAgICAgLy8gVXBkYXRlIHZhcmlhbnRJZCBpZiB2YXJpYW50IGlzIHN3aXRjaGVkIG9uIHByb2R1Y3QgcGFnZVxuICAgICAgICB0aGlzLnZhcmlhbnRJZENoYW5nZWRVbnN1YnNjcmliZXIgPSBzdWJzY3JpYmUoUFVCX1NVQl9FVkVOVFMudmFyaWFudENoYW5nZSwgKGV2ZW50KSA9PiB7XG4gICAgICAgICAgdGhpcy52YXJpYW50SWQgPSBldmVudC5kYXRhLnZhcmlhbnQuaWQudG9TdHJpbmcoKTtcbiAgICAgICAgICB0aGlzLmdldFZvbHVtZVByaWNpbmdBcnJheSgpO1xuICAgICAgICB9KTtcblxuICAgICAgICB0aGlzLnVwZGF0ZVByaWNlUGVySXRlbVVuc3Vic2NyaWJlciA9IHN1YnNjcmliZShQVUJfU1VCX0VWRU5UUy5jYXJ0VXBkYXRlLCAocmVzcG9uc2UpID0+IHtcbiAgICAgICAgICBpZiAoIXJlc3BvbnNlLmNhcnREYXRhKSByZXR1cm47XG5cbiAgICAgICAgICAvLyBJdGVtIHdhcyBhZGRlZCB0byBjYXJ0IHZpYSBwcm9kdWN0IHBhZ2VcbiAgICAgICAgICBpZiAocmVzcG9uc2UuY2FydERhdGFbJ3ZhcmlhbnRfaWQnXSAhPT0gdW5kZWZpbmVkKSB7XG4gICAgICAgICAgICBpZiAocmVzcG9uc2UucHJvZHVjdFZhcmlhbnRJZCA9PT0gdGhpcy52YXJpYW50SWQpIHRoaXMudXBkYXRlUHJpY2VQZXJJdGVtKHJlc3BvbnNlLmNhcnREYXRhLnF1YW50aXR5KTtcbiAgICAgICAgICAgIC8vIFF0eSB3YXMgdXBkYXRlZCBpbiBjYXJ0XG4gICAgICAgICAgfSBlbHNlIGlmIChyZXNwb25zZS5jYXJ0RGF0YS5pdGVtX2NvdW50ICE9PSAwKSB7XG4gICAgICAgICAgICBjb25zdCBpc1ZhcmlhbnQgPSByZXNwb25zZS5jYXJ0RGF0YS5pdGVtcy5maW5kKChpdGVtKSA9PiBpdGVtLnZhcmlhbnRfaWQudG9TdHJpbmcoKSA9PT0gdGhpcy52YXJpYW50SWQpO1xuICAgICAgICAgICAgaWYgKGlzVmFyaWFudCAmJiBpc1ZhcmlhbnQuaWQudG9TdHJpbmcoKSA9PT0gdGhpcy52YXJpYW50SWQpIHtcbiAgICAgICAgICAgICAgLy8gVGhlIHZhcmlhbnQgaXMgc3RpbGwgaW4gY2FydFxuICAgICAgICAgICAgICB0aGlzLnVwZGF0ZVByaWNlUGVySXRlbShpc1ZhcmlhbnQucXVhbnRpdHkpO1xuICAgICAgICAgICAgfSBlbHNlIHtcbiAgICAgICAgICAgICAgLy8gVGhlIHZhcmlhbnQgd2FzIHJlbW92ZWQgZnJvbSBjYXJ0LCBxdHkgaXMgMFxuICAgICAgICAgICAgICB0aGlzLnVwZGF0ZVByaWNlUGVySXRlbSgwKTtcbiAgICAgICAgICAgIH1cbiAgICAgICAgICAgIC8vIEFsbCBpdGVtcyB3ZXJlIHJlbW92ZWQgZnJvbSBjYXJ0XG4gICAgICAgICAgfSBlbHNlIHtcbiAgICAgICAgICAgIHRoaXMudXBkYXRlUHJpY2VQZXJJdGVtKDApO1xuICAgICAgICAgIH1cbiAgICAgICAgfSk7XG4gICAgICB9XG5cbiAgICAgIGRpc2Nvbm5lY3RlZENhbGxiYWNrKCkge1xuICAgICAgICBpZiAodGhpcy51cGRhdGVQcmljZVBlckl0ZW1VbnN1YnNjcmliZXIpIHtcbiAgICAgICAgICB0aGlzLnVwZGF0ZVByaWNlUGVySXRlbVVuc3Vic2NyaWJlcigpO1xuICAgICAgICB9XG4gICAgICAgIGlmICh0aGlzLnZhcmlhbnRJZENoYW5nZWRVbnN1YnNjcmliZXIpIHtcbiAgICAgICAgICB0aGlzLnZhcmlhbnRJZENoYW5nZWRVbnN1YnNjcmliZXIoKTtcbiAgICAgICAgfVxuICAgICAgfVxuXG4gICAgICBvbklucHV0Q2hhbmdlKCkge1xuICAgICAgICB0aGlzLnVwZGF0ZVByaWNlUGVySXRlbSgpO1xuICAgICAgfVxuXG4gICAgICB1cGRhdGVQcmljZVBlckl0ZW0odXBkYXRlZENhcnRRdWFudGl0eSkge1xuICAgICAgICBpZiAodGhpcy5pbnB1dCkge1xuICAgICAgICAgIHRoaXMuZW50ZXJlZFF0eSA9IHBhcnNlSW50KHRoaXMuaW5wdXQudmFsdWUpO1xuICAgICAgICAgIHRoaXMuc3RlcCA9IHBhcnNlSW50KHRoaXMuaW5wdXQuc3RlcClcbiAgICAgICAgfVxuXG4gICAgICAgIC8vIHVwZGF0ZWRDYXJ0UXVhbnRpdHkgaXMgdW5kZWZpbmVkIHdoZW4gcXR5IGlzIHVwZGF0ZWQgb24gcHJvZHVjdCBwYWdlLiBXZSBuZWVkIHRvIHN1bSBlbnRlcmVkIHF0eSBhbmQgY3VycmVudCBxdHkgaW4gY2FydC5cbiAgICAgICAgLy8gdXBkYXRlZENhcnRRdWFudGl0eSBpcyBub3QgdW5kZWZpbmVkIHdoZW4gcXR5IGlzIHVwZGF0ZWQgaW4gY2FydC4gV2UgbmVlZCB0byBzdW0gcXR5IGluIGNhcnQgYW5kIG1pbiBxdHkgZm9yIHByb2R1Y3QuXG4gICAgICAgIHRoaXMuY3VycmVudFF0eUZvclZvbHVtZVByaWNpbmcgPSB1cGRhdGVkQ2FydFF1YW50aXR5ID09PSB1bmRlZmluZWQgPyB0aGlzLmdldENhcnRRdWFudGl0eSh1cGRhdGVkQ2FydFF1YW50aXR5KSArIHRoaXMuZW50ZXJlZFF0eSA6IHRoaXMuZ2V0Q2FydFF1YW50aXR5KHVwZGF0ZWRDYXJ0UXVhbnRpdHkpICsgcGFyc2VJbnQodGhpcy5zdGVwKTtcblxuICAgICAgICBpZiAodGhpcy5jbGFzc0xpc3QuY29udGFpbnMoJ3ZhcmlhbnQtaXRlbV9fcHJpY2UtcGVyLWl0ZW0nKSkge1xuICAgICAgICAgIHRoaXMuY3VycmVudFF0eUZvclZvbHVtZVByaWNpbmcgPSB0aGlzLmdldENhcnRRdWFudGl0eSh1cGRhdGVkQ2FydFF1YW50aXR5KTtcbiAgICAgICAgfVxuICAgICAgICBmb3IgKGxldCBwYWlyIG9mIHRoaXMucXR5UHJpY2VQYWlycykge1xuICAgICAgICAgIGlmICh0aGlzLmN1cnJlbnRRdHlGb3JWb2x1bWVQcmljaW5nID49IHBhaXJbMF0pIHtcbiAgICAgICAgICAgIGNvbnN0IHByaWNlUGVySXRlbUN1cnJlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBwcmljZS1wZXItaXRlbVtpZF49XCJQcmljZS1QZXItSXRlbS0ke3RoaXMuZGF0YXNldC5zZWN0aW9uSWQgfHwgdGhpcy5kYXRhc2V0LnZhcmlhbnRJZH1cIl0gLnByaWNlLXBlci1pdGVtIHNwYW5gKTtcbiAgICAgICAgICAgIHRoaXMuY2xhc3NMaXN0LmNvbnRhaW5zKCd2YXJpYW50LWl0ZW1fX3ByaWNlLXBlci1pdGVtJykgPyBwcmljZVBlckl0ZW1DdXJyZW50LmlubmVySFRNTCA9IHdpbmRvdy5xdWlja09yZGVyTGlzdFN0cmluZ3MuZWFjaC5yZXBsYWNlKCdbbW9uZXldJywgcGFpclsxXSkgOiBwcmljZVBlckl0ZW1DdXJyZW50LmlubmVySFRNTCA9IHBhaXJbMV07XG4gICAgICAgICAgICBicmVhaztcbiAgICAgICAgICB9XG4gICAgICAgIH1cbiAgICAgIH1cblxuICAgICAgZ2V0Q2FydFF1YW50aXR5KHVwZGF0ZWRDYXJ0UXVhbnRpdHkpIHtcbiAgICAgICAgcmV0dXJuICh1cGRhdGVkQ2FydFF1YW50aXR5IHx8IHVwZGF0ZWRDYXJ0UXVhbnRpdHkgPT09IDApID8gdXBkYXRlZENhcnRRdWFudGl0eSA6IHBhcnNlSW50KHRoaXMuaW5wdXQuZGF0YXNldC5jYXJ0UXVhbnRpdHkpO1xuICAgICAgfVxuXG4gICAgICBnZXRWb2x1bWVQcmljaW5nQXJyYXkoKSB7XG4gICAgICAgIGNvbnN0IHZvbHVtZVByaWNpbmcgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChgVm9sdW1lLSR7dGhpcy5kYXRhc2V0LnNlY3Rpb25JZCB8fCB0aGlzLmRhdGFzZXQudmFyaWFudElkfWApO1xuICAgICAgICB0aGlzLnF0eVByaWNlUGFpcnMgPSBbXTtcblxuICAgICAgICBpZiAodm9sdW1lUHJpY2luZykge1xuICAgICAgICAgIHZvbHVtZVByaWNpbmcucXVlcnlTZWxlY3RvckFsbCgnbGknKS5mb3JFYWNoKGxpID0+IHtcbiAgICAgICAgICAgIGNvbnN0IHF0eSA9IHBhcnNlSW50KGxpLnF1ZXJ5U2VsZWN0b3IoJ3NwYW46Zmlyc3QtY2hpbGQnKS50ZXh0Q29udGVudCk7XG4gICAgICAgICAgICBjb25zdCBwcmljZSA9IChsaS5xdWVyeVNlbGVjdG9yKCdzcGFuOm5vdCg6Zmlyc3QtY2hpbGQpOmxhc3QtY2hpbGQnKS5kYXRhc2V0LnRleHQpO1xuICAgICAgICAgICAgdGhpcy5xdHlQcmljZVBhaXJzLnB1c2goW3F0eSwgcHJpY2VdKTtcbiAgICAgICAgICB9KTtcbiAgICAgICAgfVxuICAgICAgICB0aGlzLnF0eVByaWNlUGFpcnMucmV2ZXJzZSgpO1xuICAgICAgfVxuICAgIH1cbiAgKTtcbn1cbiJdLCJuYW1lcyI6W10sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./src/js/components/price-per-item.js\n"
+customElements.get("price-per-item") ||
+  customElements.define(
+    "price-per-item",
+    class extends HTMLElement {
+      constructor() {
+        super(),
+          (this.variantId = this.dataset.variantId),
+          (this.input = document.getElementById(
+            `Quantity-${this.dataset.sectionId || this.dataset.variantId}`
+          )),
+          this.input &&
+            this.input.addEventListener(
+              "change",
+              this.onInputChange.bind(this)
+            ),
+          this.getVolumePricingArray();
+      }
+      updatePricePerItemUnsubscriber = void 0;
+      variantIdChangedUnsubscriber = void 0;
+      connectedCallback() {
+        (this.variantIdChangedUnsubscriber = subscribe(
+          PUB_SUB_EVENTS.variantChange,
+          (t) => {
+            (this.variantId = t.data.variant.id.toString()),
+              this.getVolumePricingArray();
+          }
+        )),
+          (this.updatePricePerItemUnsubscriber = subscribe(
+            PUB_SUB_EVENTS.cartUpdate,
+            (t) => {
+              if (t.cartData)
+                if (void 0 !== t.cartData.variant_id)
+                  t.productVariantId === this.variantId &&
+                    this.updatePricePerItem(t.cartData.quantity);
+                else if (0 !== t.cartData.item_count) {
+                  const e = t.cartData.items.find(
+                    (t) => t.variant_id.toString() === this.variantId
+                  );
+                  e && e.id.toString() === this.variantId
+                    ? this.updatePricePerItem(e.quantity)
+                    : this.updatePricePerItem(0);
+                } else this.updatePricePerItem(0);
+            }
+          ));
+      }
+      disconnectedCallback() {
+        this.updatePricePerItemUnsubscriber &&
+          this.updatePricePerItemUnsubscriber(),
+          this.variantIdChangedUnsubscriber &&
+            this.variantIdChangedUnsubscriber();
+      }
+      onInputChange() {
+        this.updatePricePerItem();
+      }
+      updatePricePerItem(t) {
+        this.input &&
+          ((this.enteredQty = parseInt(this.input.value)),
+          (this.step = parseInt(this.input.step))),
+          (this.currentQtyForVolumePricing =
+            void 0 === t
+              ? this.getCartQuantity(t) + this.enteredQty
+              : this.getCartQuantity(t) + parseInt(this.step)),
+          this.classList.contains("variant-item__price-per-item") &&
+            (this.currentQtyForVolumePricing = this.getCartQuantity(t));
+        for (let t of this.qtyPricePairs)
+          if (this.currentQtyForVolumePricing >= t[0]) {
+            const e = document.querySelector(
+              `price-per-item[id^="Price-Per-Item-${
+                this.dataset.sectionId || this.dataset.variantId
+              }"] .price-per-item span`
+            );
+            this.classList.contains("variant-item__price-per-item")
+              ? (e.innerHTML = window.quickOrderListStrings.each.replace(
+                  "[money]",
+                  t[1]
+                ))
+              : (e.innerHTML = t[1]);
+            break;
+          }
+      }
+      getCartQuantity(t) {
+        return t || 0 === t ? t : parseInt(this.input.dataset.cartQuantity);
+      }
+      getVolumePricingArray() {
+        const t = document.getElementById(
+          `Volume-${this.dataset.sectionId || this.dataset.variantId}`
         );
-
-        /***/
-      },
-
-    /******/
-  };
-  /************************************************************************/
-  /******/
-  /******/ // startup
-  /******/ // Load entry module and return exports
-  /******/ // This entry module can't be inlined because the eval-source-map devtool is used.
-  /******/ var __webpack_exports__ = {};
-  /******/ __webpack_modules__["./src/js/components/price-per-item.js"]();
-  /******/
-  /******/
-})();
+        (this.qtyPricePairs = []),
+          t &&
+            t.querySelectorAll("li").forEach((t) => {
+              const e = parseInt(
+                  t.querySelector("span:first-child").textContent
+                ),
+                i = t.querySelector("span:not(:first-child):last-child").dataset
+                  .text;
+              this.qtyPricePairs.push([e, i]);
+            }),
+          this.qtyPricePairs.reverse();
+      }
+    }
+  );

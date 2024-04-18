@@ -1,35 +1,94 @@
-/*
- * ATTENTION: An "eval-source-map" devtool has been used.
- * This devtool is neither made for production nor for readable output files.
- * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
- * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
- * or disable the default devtool with "devtool: false".
- * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
- */
-/******/ (() => {
-  // webpackBootstrap
-  /******/ var __webpack_modules__ = {
-    /***/ "./src/js/components/quantity-popover.js":
-      /*!***********************************************!*\
-  !*** ./src/js/components/quantity-popover.js ***!
-  \***********************************************/
-      /***/ () => {
-        eval(
-          "if (!customElements.get('quantity-popover')) {\n  customElements.define(\n    'quantity-popover',\n    class QuantityPopover extends HTMLElement {\n      constructor() {\n        super();\n        this.mql = window.matchMedia('(min-width: 990px)');\n        this.mqlTablet = window.matchMedia('(min-width: 750px)');\n        this.infoButtonDesktop = this.querySelector('.quantity-popover__info-button--icon-only');\n        this.infoButtonMobile = this.querySelector('.quantity-popover__info-button--icon-with-label');\n        this.popoverInfo = this.querySelector('.quantity-popover__info');\n        this.closeButton = this.querySelector('.button-close');\n        this.variantInfo = this.querySelector('.quantity-popover-container');\n        this.eventMouseEnterHappened = false;\n\n        if (this.closeButton) {\n          this.closeButton.addEventListener('click', this.closePopover.bind(this));\n        }\n\n        if (this.popoverInfo && this.infoButtonDesktop && this.mql.matches) {\n          this.popoverInfo.addEventListener('mouseenter', this.closePopover.bind(this));\n        }\n\n        if (this.infoButtonDesktop) {\n          this.infoButtonDesktop.addEventListener('click', this.togglePopover.bind(this));\n          this.infoButtonDesktop.addEventListener('focusout', this.closePopover.bind(this));\n        }\n\n        if (this.infoButtonMobile) {\n          this.infoButtonMobile.addEventListener('click', this.togglePopover.bind(this));\n          this.infoButtonMobile.addEventListener('focusout', this.closePopover.bind(this));\n        }\n\n        if (this.infoButtonDesktop && this.mqlTablet.matches) {\n          this.variantInfo.addEventListener('mouseenter', this.togglePopover.bind(this));\n          this.variantInfo.addEventListener('mouseleave', this.closePopover.bind(this));\n        }\n      }\n\n      togglePopover(event) {\n        event.preventDefault();\n        if (event.type === 'mouseenter') {\n          this.eventMouseEnterHappened = true;\n        }\n\n        if (event.type === 'click' && this.eventMouseEnterHappened) return;\n\n        const button = this.infoButtonDesktop && this.mql.matches ? this.infoButtonDesktop : this.infoButtonMobile;\n        const isExpanded = button.getAttribute('aria-expanded') === 'true';\n\n        button.setAttribute('aria-expanded', !isExpanded);\n\n        this.popoverInfo.toggleAttribute('hidden');\n\n        const isOpen = button.getAttribute('aria-expanded') === 'true';\n\n        button.classList.toggle('quantity-popover__info-button--open');\n\n        if (isOpen && event.type !== 'mouseenter') {\n          button.focus();\n        }\n      }\n\n      closePopover(event) {\n        event.preventDefault();\n        const isChild = this.variantInfo.contains(event.relatedTarget);\n\n        const button = this.infoButtonDesktop && this.mql.matches ? this.infoButtonDesktop : this.infoButtonMobile;\n\n        if (!event.relatedTarget || !isChild) {\n          button.setAttribute('aria-expanded', 'false');\n          button.classList.remove('quantity-popover__info-button--open');\n          this.popoverInfo.setAttribute('hidden', '');\n        }\n\n        this.eventMouseEnterHappened = false;\n      }\n    }\n  );\n}\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvanMvY29tcG9uZW50cy9xdWFudGl0eS1wb3BvdmVyLmpzLmpzIiwibWFwcGluZ3MiOiJBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9sZWFybi13ZWJwYWNrLy4vc3JjL2pzL2NvbXBvbmVudHMvcXVhbnRpdHktcG9wb3Zlci5qcz9jN2Y1Il0sInNvdXJjZXNDb250ZW50IjpbImlmICghY3VzdG9tRWxlbWVudHMuZ2V0KCdxdWFudGl0eS1wb3BvdmVyJykpIHtcbiAgY3VzdG9tRWxlbWVudHMuZGVmaW5lKFxuICAgICdxdWFudGl0eS1wb3BvdmVyJyxcbiAgICBjbGFzcyBRdWFudGl0eVBvcG92ZXIgZXh0ZW5kcyBIVE1MRWxlbWVudCB7XG4gICAgICBjb25zdHJ1Y3RvcigpIHtcbiAgICAgICAgc3VwZXIoKTtcbiAgICAgICAgdGhpcy5tcWwgPSB3aW5kb3cubWF0Y2hNZWRpYSgnKG1pbi13aWR0aDogOTkwcHgpJyk7XG4gICAgICAgIHRoaXMubXFsVGFibGV0ID0gd2luZG93Lm1hdGNoTWVkaWEoJyhtaW4td2lkdGg6IDc1MHB4KScpO1xuICAgICAgICB0aGlzLmluZm9CdXR0b25EZXNrdG9wID0gdGhpcy5xdWVyeVNlbGVjdG9yKCcucXVhbnRpdHktcG9wb3Zlcl9faW5mby1idXR0b24tLWljb24tb25seScpO1xuICAgICAgICB0aGlzLmluZm9CdXR0b25Nb2JpbGUgPSB0aGlzLnF1ZXJ5U2VsZWN0b3IoJy5xdWFudGl0eS1wb3BvdmVyX19pbmZvLWJ1dHRvbi0taWNvbi13aXRoLWxhYmVsJyk7XG4gICAgICAgIHRoaXMucG9wb3ZlckluZm8gPSB0aGlzLnF1ZXJ5U2VsZWN0b3IoJy5xdWFudGl0eS1wb3BvdmVyX19pbmZvJyk7XG4gICAgICAgIHRoaXMuY2xvc2VCdXR0b24gPSB0aGlzLnF1ZXJ5U2VsZWN0b3IoJy5idXR0b24tY2xvc2UnKTtcbiAgICAgICAgdGhpcy52YXJpYW50SW5mbyA9IHRoaXMucXVlcnlTZWxlY3RvcignLnF1YW50aXR5LXBvcG92ZXItY29udGFpbmVyJyk7XG4gICAgICAgIHRoaXMuZXZlbnRNb3VzZUVudGVySGFwcGVuZWQgPSBmYWxzZTtcblxuICAgICAgICBpZiAodGhpcy5jbG9zZUJ1dHRvbikge1xuICAgICAgICAgIHRoaXMuY2xvc2VCdXR0b24uYWRkRXZlbnRMaXN0ZW5lcignY2xpY2snLCB0aGlzLmNsb3NlUG9wb3Zlci5iaW5kKHRoaXMpKTtcbiAgICAgICAgfVxuXG4gICAgICAgIGlmICh0aGlzLnBvcG92ZXJJbmZvICYmIHRoaXMuaW5mb0J1dHRvbkRlc2t0b3AgJiYgdGhpcy5tcWwubWF0Y2hlcykge1xuICAgICAgICAgIHRoaXMucG9wb3ZlckluZm8uYWRkRXZlbnRMaXN0ZW5lcignbW91c2VlbnRlcicsIHRoaXMuY2xvc2VQb3BvdmVyLmJpbmQodGhpcykpO1xuICAgICAgICB9XG5cbiAgICAgICAgaWYgKHRoaXMuaW5mb0J1dHRvbkRlc2t0b3ApIHtcbiAgICAgICAgICB0aGlzLmluZm9CdXR0b25EZXNrdG9wLmFkZEV2ZW50TGlzdGVuZXIoJ2NsaWNrJywgdGhpcy50b2dnbGVQb3BvdmVyLmJpbmQodGhpcykpO1xuICAgICAgICAgIHRoaXMuaW5mb0J1dHRvbkRlc2t0b3AuYWRkRXZlbnRMaXN0ZW5lcignZm9jdXNvdXQnLCB0aGlzLmNsb3NlUG9wb3Zlci5iaW5kKHRoaXMpKTtcbiAgICAgICAgfVxuXG4gICAgICAgIGlmICh0aGlzLmluZm9CdXR0b25Nb2JpbGUpIHtcbiAgICAgICAgICB0aGlzLmluZm9CdXR0b25Nb2JpbGUuYWRkRXZlbnRMaXN0ZW5lcignY2xpY2snLCB0aGlzLnRvZ2dsZVBvcG92ZXIuYmluZCh0aGlzKSk7XG4gICAgICAgICAgdGhpcy5pbmZvQnV0dG9uTW9iaWxlLmFkZEV2ZW50TGlzdGVuZXIoJ2ZvY3Vzb3V0JywgdGhpcy5jbG9zZVBvcG92ZXIuYmluZCh0aGlzKSk7XG4gICAgICAgIH1cblxuICAgICAgICBpZiAodGhpcy5pbmZvQnV0dG9uRGVza3RvcCAmJiB0aGlzLm1xbFRhYmxldC5tYXRjaGVzKSB7XG4gICAgICAgICAgdGhpcy52YXJpYW50SW5mby5hZGRFdmVudExpc3RlbmVyKCdtb3VzZWVudGVyJywgdGhpcy50b2dnbGVQb3BvdmVyLmJpbmQodGhpcykpO1xuICAgICAgICAgIHRoaXMudmFyaWFudEluZm8uYWRkRXZlbnRMaXN0ZW5lcignbW91c2VsZWF2ZScsIHRoaXMuY2xvc2VQb3BvdmVyLmJpbmQodGhpcykpO1xuICAgICAgICB9XG4gICAgICB9XG5cbiAgICAgIHRvZ2dsZVBvcG92ZXIoZXZlbnQpIHtcbiAgICAgICAgZXZlbnQucHJldmVudERlZmF1bHQoKTtcbiAgICAgICAgaWYgKGV2ZW50LnR5cGUgPT09ICdtb3VzZWVudGVyJykge1xuICAgICAgICAgIHRoaXMuZXZlbnRNb3VzZUVudGVySGFwcGVuZWQgPSB0cnVlO1xuICAgICAgICB9XG5cbiAgICAgICAgaWYgKGV2ZW50LnR5cGUgPT09ICdjbGljaycgJiYgdGhpcy5ldmVudE1vdXNlRW50ZXJIYXBwZW5lZCkgcmV0dXJuO1xuXG4gICAgICAgIGNvbnN0IGJ1dHRvbiA9IHRoaXMuaW5mb0J1dHRvbkRlc2t0b3AgJiYgdGhpcy5tcWwubWF0Y2hlcyA/IHRoaXMuaW5mb0J1dHRvbkRlc2t0b3AgOiB0aGlzLmluZm9CdXR0b25Nb2JpbGU7XG4gICAgICAgIGNvbnN0IGlzRXhwYW5kZWQgPSBidXR0b24uZ2V0QXR0cmlidXRlKCdhcmlhLWV4cGFuZGVkJykgPT09ICd0cnVlJztcblxuICAgICAgICBidXR0b24uc2V0QXR0cmlidXRlKCdhcmlhLWV4cGFuZGVkJywgIWlzRXhwYW5kZWQpO1xuXG4gICAgICAgIHRoaXMucG9wb3ZlckluZm8udG9nZ2xlQXR0cmlidXRlKCdoaWRkZW4nKTtcblxuICAgICAgICBjb25zdCBpc09wZW4gPSBidXR0b24uZ2V0QXR0cmlidXRlKCdhcmlhLWV4cGFuZGVkJykgPT09ICd0cnVlJztcblxuICAgICAgICBidXR0b24uY2xhc3NMaXN0LnRvZ2dsZSgncXVhbnRpdHktcG9wb3Zlcl9faW5mby1idXR0b24tLW9wZW4nKTtcblxuICAgICAgICBpZiAoaXNPcGVuICYmIGV2ZW50LnR5cGUgIT09ICdtb3VzZWVudGVyJykge1xuICAgICAgICAgIGJ1dHRvbi5mb2N1cygpO1xuICAgICAgICB9XG4gICAgICB9XG5cbiAgICAgIGNsb3NlUG9wb3ZlcihldmVudCkge1xuICAgICAgICBldmVudC5wcmV2ZW50RGVmYXVsdCgpO1xuICAgICAgICBjb25zdCBpc0NoaWxkID0gdGhpcy52YXJpYW50SW5mby5jb250YWlucyhldmVudC5yZWxhdGVkVGFyZ2V0KTtcblxuICAgICAgICBjb25zdCBidXR0b24gPSB0aGlzLmluZm9CdXR0b25EZXNrdG9wICYmIHRoaXMubXFsLm1hdGNoZXMgPyB0aGlzLmluZm9CdXR0b25EZXNrdG9wIDogdGhpcy5pbmZvQnV0dG9uTW9iaWxlO1xuXG4gICAgICAgIGlmICghZXZlbnQucmVsYXRlZFRhcmdldCB8fCAhaXNDaGlsZCkge1xuICAgICAgICAgIGJ1dHRvbi5zZXRBdHRyaWJ1dGUoJ2FyaWEtZXhwYW5kZWQnLCAnZmFsc2UnKTtcbiAgICAgICAgICBidXR0b24uY2xhc3NMaXN0LnJlbW92ZSgncXVhbnRpdHktcG9wb3Zlcl9faW5mby1idXR0b24tLW9wZW4nKTtcbiAgICAgICAgICB0aGlzLnBvcG92ZXJJbmZvLnNldEF0dHJpYnV0ZSgnaGlkZGVuJywgJycpO1xuICAgICAgICB9XG5cbiAgICAgICAgdGhpcy5ldmVudE1vdXNlRW50ZXJIYXBwZW5lZCA9IGZhbHNlO1xuICAgICAgfVxuICAgIH1cbiAgKTtcbn1cbiJdLCJuYW1lcyI6W10sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./src/js/components/quantity-popover.js\n"
-        );
-
-        /***/
-      },
-
-    /******/
-  };
-  /************************************************************************/
-  /******/
-  /******/ // startup
-  /******/ // Load entry module and return exports
-  /******/ // This entry module can't be inlined because the eval-source-map devtool is used.
-  /******/ var __webpack_exports__ = {};
-  /******/ __webpack_modules__["./src/js/components/quantity-popover.js"]();
-  /******/
-  /******/
-})();
+customElements.get("quantity-popover") ||
+  customElements.define(
+    "quantity-popover",
+    class extends HTMLElement {
+      constructor() {
+        super(),
+          (this.mql = window.matchMedia("(min-width: 990px)")),
+          (this.mqlTablet = window.matchMedia("(min-width: 750px)")),
+          (this.infoButtonDesktop = this.querySelector(
+            ".quantity-popover__info-button--icon-only"
+          )),
+          (this.infoButtonMobile = this.querySelector(
+            ".quantity-popover__info-button--icon-with-label"
+          )),
+          (this.popoverInfo = this.querySelector(".quantity-popover__info")),
+          (this.closeButton = this.querySelector(".button-close")),
+          (this.variantInfo = this.querySelector(
+            ".quantity-popover-container"
+          )),
+          (this.eventMouseEnterHappened = !1),
+          this.closeButton &&
+            this.closeButton.addEventListener(
+              "click",
+              this.closePopover.bind(this)
+            ),
+          this.popoverInfo &&
+            this.infoButtonDesktop &&
+            this.mql.matches &&
+            this.popoverInfo.addEventListener(
+              "mouseenter",
+              this.closePopover.bind(this)
+            ),
+          this.infoButtonDesktop &&
+            (this.infoButtonDesktop.addEventListener(
+              "click",
+              this.togglePopover.bind(this)
+            ),
+            this.infoButtonDesktop.addEventListener(
+              "focusout",
+              this.closePopover.bind(this)
+            )),
+          this.infoButtonMobile &&
+            (this.infoButtonMobile.addEventListener(
+              "click",
+              this.togglePopover.bind(this)
+            ),
+            this.infoButtonMobile.addEventListener(
+              "focusout",
+              this.closePopover.bind(this)
+            )),
+          this.infoButtonDesktop &&
+            this.mqlTablet.matches &&
+            (this.variantInfo.addEventListener(
+              "mouseenter",
+              this.togglePopover.bind(this)
+            ),
+            this.variantInfo.addEventListener(
+              "mouseleave",
+              this.closePopover.bind(this)
+            ));
+      }
+      togglePopover(t) {
+        if (
+          (t.preventDefault(),
+          "mouseenter" === t.type && (this.eventMouseEnterHappened = !0),
+          "click" === t.type && this.eventMouseEnterHappened)
+        )
+          return;
+        const e =
+            this.infoButtonDesktop && this.mql.matches
+              ? this.infoButtonDesktop
+              : this.infoButtonMobile,
+          o = "true" === e.getAttribute("aria-expanded");
+        e.setAttribute("aria-expanded", !o),
+          this.popoverInfo.toggleAttribute("hidden");
+        const i = "true" === e.getAttribute("aria-expanded");
+        e.classList.toggle("quantity-popover__info-button--open"),
+          i && "mouseenter" !== t.type && e.focus();
+      }
+      closePopover(t) {
+        t.preventDefault();
+        const e = this.variantInfo.contains(t.relatedTarget),
+          o =
+            this.infoButtonDesktop && this.mql.matches
+              ? this.infoButtonDesktop
+              : this.infoButtonMobile;
+        (t.relatedTarget && e) ||
+          (o.setAttribute("aria-expanded", "false"),
+          o.classList.remove("quantity-popover__info-button--open"),
+          this.popoverInfo.setAttribute("hidden", "")),
+          (this.eventMouseEnterHappened = !1);
+      }
+    }
+  );

@@ -1,0 +1,18 @@
+{% comment %}
+  Renders a megamenu for the header.
+
+  Usage:
+  {% render 'header-mega-menu' %}
+{% endcomment %}
+
+<nav class="header__inline-menu">
+  <ul class="list-menu list-menu--inline" role="list">
+    {%- for link in section.settings.menu.links -%}
+      {% if link.levels > 1 %}
+        {% render 'menu-mega', link: link %}
+      {% else %}
+        {% render 'menu-dropdown', link: link %}
+      {% endif %}
+    {%- endfor -%}
+  </ul>
+</nav>

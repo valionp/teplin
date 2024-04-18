@@ -1,0 +1,250 @@
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'section-featured-products.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+  padding-top: {{ section.settings.padding_top | times: 0.5 | round: 0 }}px;
+  padding-bottom: {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+  .section-{{ section.id }}-padding {
+  padding-top: {{ section.settings.padding_top }}px;
+  padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} isolate gradient">
+  <div class="featured-products section-{{ section.id }}-padding page-width">
+    {%- if section.settings.title != blank -%}
+      <h2
+        class="featured-products__title {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+        {{ section.settings.title }}
+      </h2>
+    {%- endif -%}
+
+    {%- if section.settings.subtitle != blank -%}
+      <div
+        class="featured-products__subtitle {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+        {{ section.settings.subtitle }}
+      </div>
+    {% endif %}
+
+    {%- if section.settings.btt-text != blank -%}
+      <a href="{{ section.settings.btt-link }}"
+         class="featured-products__button {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+        {{ section.settings.btt-text }}
+      </a>
+    {% endif %}
+
+    <div class="featured-products__slider swiper">
+      <div class="swiper-wrapper">
+        {%- for block in section.blocks -%}
+          {% assign product = block.settings.product %}
+          <div
+            id="Slide-{{ section.id }}-{{ forloop.index }}"
+            class="swiper-slide slide" {{ block.shopify_attributes }}>
+            <div
+              class="featured__product card underline-links-hover {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+            {% if settings.animations_reveal_on_scroll %}
+              data-cascade
+              style="--animation-order: {{ forloop.index }};"
+              {% endif %}>
+              <div class="featured__product-image">
+                {{
+                product.featured_media
+                | image_url: width: 750
+                | image_tag:
+                width: product.featured_media.width,
+                height: product.featured_media.height,
+                loading: 'lazy'
+                }}
+              </div>
+
+              <div class="featured__product-vendor">
+                {{ product.vendor }}
+              </div>
+
+              <div class="card__heading">
+                <a href="{{ product.url }}" class="featured__product-title full-unstyled-link">
+                  {{ product.title }}
+                </a>
+              </div>
+
+              <div class="featured__product-pricing">
+                {% render 'price', product: product, price_class: '', show_compare_at_price: false %}
+
+                <div class="featured__product-reviews">
+                  {% for i in (1..5) %}
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="17.000000"
+                         height="17.000000" viewBox="0 0 17 17" fill="none">
+                      <defs/>
+                      <path id="Vector"
+                            d="M2.85 16.62L4.79 10.29L-0.34 6.62L5.99 6.62L7.99 -0.04L9.99 6.62L16.33 6.62L11.2 10.29L13.14 16.62L7.99 12.71L2.85 16.62Z"
+                            fill="{% if block.settings.stars-num >= i %}#2B2424 {% else %}#B3ADAD{% endif %}"
+                            fill-opacity="1.000000" fill-rule="nonzero"/>
+                    </svg>
+                  {% endfor %}
+
+                  <div class="featured__product-reviews-text">
+                    {{ block.settings.reviews-text }}
+                  </div>
+                </div>
+              </div>
+
+              <div class="featured__product-form">
+                <product-form data-section-id="{{ block.id }}">
+                  {%- form 'product',
+                    product,
+                    id: block.id,
+                    class: 'form',
+                    novalidate: 'novalidate',
+                    data-type: 'add-to-cart-form'
+                  -%}
+                    <input
+                      type="hidden"
+                      name="id"
+                      value="{{ product.selected_or_first_available_variant.id }}"
+                      class="product-variant-id"
+                      {% if product.selected_or_first_available_variant.available == false %}
+                        disabled
+                      {% endif %}
+                    >
+                    <button
+                      id="{{ block.id }}-submit"
+                      type="submit"
+                      name="add"
+                      class="quick-add__submit button button--full-width button--secondary"
+                      aria-haspopup="dialog"
+                      aria-labelledby="{{ block.id }}-submit title-{{ block.id }}-{{ product.id }}"
+                      aria-live="polite"
+                      data-sold-out-message="true"
+                      {% if product.selected_or_first_available_variant.available == false %}
+                        disabled
+                      {% endif %}
+                    >
+                        <span>
+                          {%- if product.selected_or_first_available_variant.available -%}
+                            {{ 'products.product.add_to_cart' | t }}
+                          {%- else -%}
+                            {{ 'products.product.sold_out' | t }}
+                          {%- endif -%}
+                        </span>
+                      <span class="sold-out-message hidden">
+                          {{ 'products.product.sold_out' | t }}
+                        </span>
+                      {%- render 'loading-spinner' -%}
+                    </button>
+                  {%- endform -%}
+                </product-form>
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.featured-collection.name",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "default": "Featured collection",
+      "label": "t:sections.featured-collection.settings.title.label"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "Subtitle"
+    },
+    {
+      "type": "text",
+      "id": "btt-text",
+      "label": "Button text"
+    },
+    {
+      "type": "url",
+      "id": "btt-link",
+      "label": "Button link"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "info": "t:sections.all.colors.has_cards_info",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Product",
+      "type": "product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "range",
+          "id": "stars-num",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "label": "Number of stars",
+          "default": 4
+        },
+        {
+          "type": "richtext",
+          "id": "reviews-text",
+          "label": "Reviews text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.featured-collection.presets.name"
+    }
+  ]
+}
+{% endschema %}

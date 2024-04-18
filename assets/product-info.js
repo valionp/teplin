@@ -1,35 +1,98 @@
-/*
- * ATTENTION: An "eval-source-map" devtool has been used.
- * This devtool is neither made for production nor for readable output files.
- * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
- * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
- * or disable the default devtool with "devtool: false".
- * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
- */
-/******/ (() => {
-  // webpackBootstrap
-  /******/ var __webpack_modules__ = {
-    /***/ "./src/js/components/product-info.js":
-      /*!*******************************************!*\
-  !*** ./src/js/components/product-info.js ***!
-  \*******************************************/
-      /***/ () => {
-        eval(
-          "if (!customElements.get('product-info')) {\n  customElements.define(\n    'product-info',\n    class ProductInfo extends HTMLElement {\n      constructor() {\n        super();\n        this.input = this.querySelector('.quantity__input');\n        this.currentVariant = this.querySelector('.product-variant-id');\n        this.submitButton = this.querySelector('[type=\"submit\"]');\n      }\n\n      cartUpdateUnsubscriber = undefined;\n      variantChangeUnsubscriber = undefined;\n\n      connectedCallback() {\n        if (!this.input) return;\n        this.quantityForm = this.querySelector('.product-form__quantity');\n        if (!this.quantityForm) return;\n        this.setQuantityBoundries();\n        if (!this.dataset.originalSection) {\n          this.cartUpdateUnsubscriber = subscribe(PUB_SUB_EVENTS.cartUpdate, this.fetchQuantityRules.bind(this));\n        }\n        this.variantChangeUnsubscriber = subscribe(PUB_SUB_EVENTS.variantChange, (event) => {\n          const sectionId = this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section;\n          if (event.data.sectionId !== sectionId) return;\n          this.updateQuantityRules(event.data.sectionId, event.data.html);\n          this.setQuantityBoundries();\n        });\n      }\n\n      disconnectedCallback() {\n        if (this.cartUpdateUnsubscriber) {\n          this.cartUpdateUnsubscriber();\n        }\n        if (this.variantChangeUnsubscriber) {\n          this.variantChangeUnsubscriber();\n        }\n      }\n\n      setQuantityBoundries() {\n        const data = {\n          cartQuantity: this.input.dataset.cartQuantity ? parseInt(this.input.dataset.cartQuantity) : 0,\n          min: this.input.dataset.min ? parseInt(this.input.dataset.min) : 1,\n          max: this.input.dataset.max ? parseInt(this.input.dataset.max) : null,\n          step: this.input.step ? parseInt(this.input.step) : 1,\n        };\n\n        let min = data.min;\n        const max = data.max === null ? data.max : data.max - data.cartQuantity;\n        if (max !== null) min = Math.min(min, max);\n        if (data.cartQuantity >= data.min) min = Math.min(min, data.step);\n\n        this.input.min = min;\n        this.input.max = max;\n        this.input.value = min;\n        publish(PUB_SUB_EVENTS.quantityUpdate, undefined);\n      }\n\n      fetchQuantityRules() {\n        if (!this.currentVariant || !this.currentVariant.value) return;\n        this.querySelector('.quantity__rules-cart .loading__spinner').classList.remove('hidden');\n        fetch(`${this.dataset.url}?variant=${this.currentVariant.value}&section_id=${this.dataset.section}`)\n          .then((response) => {\n            return response.text();\n          })\n          .then((responseText) => {\n            const html = new DOMParser().parseFromString(responseText, 'text/html');\n            this.updateQuantityRules(this.dataset.section, html);\n            this.setQuantityBoundries();\n          })\n          .catch((e) => {\n            console.error(e);\n          })\n          .finally(() => {\n            this.querySelector('.quantity__rules-cart .loading__spinner').classList.add('hidden');\n          });\n      }\n\n      updateQuantityRules(sectionId, html) {\n        const quantityFormUpdated = html.getElementById(`Quantity-Form-${sectionId}`);\n        const selectors = ['.quantity__input', '.quantity__rules', '.quantity__label'];\n        for (let selector of selectors) {\n          const current = this.quantityForm.querySelector(selector);\n          const updated = quantityFormUpdated.querySelector(selector);\n          if (!current || !updated) continue;\n          if (selector === '.quantity__input') {\n            const attributes = ['data-cart-quantity', 'data-min', 'data-max', 'step'];\n            for (let attribute of attributes) {\n              const valueUpdated = updated.getAttribute(attribute);\n              if (valueUpdated !== null) current.setAttribute(attribute, valueUpdated);\n            }\n          } else {\n            current.innerHTML = updated.innerHTML;\n          }\n        }\n      }\n    }\n  );\n}\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvanMvY29tcG9uZW50cy9wcm9kdWN0LWluZm8uanMuanMiLCJtYXBwaW5ncyI6IkFBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vbGVhcm4td2VicGFjay8uL3NyYy9qcy9jb21wb25lbnRzL3Byb2R1Y3QtaW5mby5qcz9hMjI5Il0sInNvdXJjZXNDb250ZW50IjpbImlmICghY3VzdG9tRWxlbWVudHMuZ2V0KCdwcm9kdWN0LWluZm8nKSkge1xuICBjdXN0b21FbGVtZW50cy5kZWZpbmUoXG4gICAgJ3Byb2R1Y3QtaW5mbycsXG4gICAgY2xhc3MgUHJvZHVjdEluZm8gZXh0ZW5kcyBIVE1MRWxlbWVudCB7XG4gICAgICBjb25zdHJ1Y3RvcigpIHtcbiAgICAgICAgc3VwZXIoKTtcbiAgICAgICAgdGhpcy5pbnB1dCA9IHRoaXMucXVlcnlTZWxlY3RvcignLnF1YW50aXR5X19pbnB1dCcpO1xuICAgICAgICB0aGlzLmN1cnJlbnRWYXJpYW50ID0gdGhpcy5xdWVyeVNlbGVjdG9yKCcucHJvZHVjdC12YXJpYW50LWlkJyk7XG4gICAgICAgIHRoaXMuc3VibWl0QnV0dG9uID0gdGhpcy5xdWVyeVNlbGVjdG9yKCdbdHlwZT1cInN1Ym1pdFwiXScpO1xuICAgICAgfVxuXG4gICAgICBjYXJ0VXBkYXRlVW5zdWJzY3JpYmVyID0gdW5kZWZpbmVkO1xuICAgICAgdmFyaWFudENoYW5nZVVuc3Vic2NyaWJlciA9IHVuZGVmaW5lZDtcblxuICAgICAgY29ubmVjdGVkQ2FsbGJhY2soKSB7XG4gICAgICAgIGlmICghdGhpcy5pbnB1dCkgcmV0dXJuO1xuICAgICAgICB0aGlzLnF1YW50aXR5Rm9ybSA9IHRoaXMucXVlcnlTZWxlY3RvcignLnByb2R1Y3QtZm9ybV9fcXVhbnRpdHknKTtcbiAgICAgICAgaWYgKCF0aGlzLnF1YW50aXR5Rm9ybSkgcmV0dXJuO1xuICAgICAgICB0aGlzLnNldFF1YW50aXR5Qm91bmRyaWVzKCk7XG4gICAgICAgIGlmICghdGhpcy5kYXRhc2V0Lm9yaWdpbmFsU2VjdGlvbikge1xuICAgICAgICAgIHRoaXMuY2FydFVwZGF0ZVVuc3Vic2NyaWJlciA9IHN1YnNjcmliZShQVUJfU1VCX0VWRU5UUy5jYXJ0VXBkYXRlLCB0aGlzLmZldGNoUXVhbnRpdHlSdWxlcy5iaW5kKHRoaXMpKTtcbiAgICAgICAgfVxuICAgICAgICB0aGlzLnZhcmlhbnRDaGFuZ2VVbnN1YnNjcmliZXIgPSBzdWJzY3JpYmUoUFVCX1NVQl9FVkVOVFMudmFyaWFudENoYW5nZSwgKGV2ZW50KSA9PiB7XG4gICAgICAgICAgY29uc3Qgc2VjdGlvbklkID0gdGhpcy5kYXRhc2V0Lm9yaWdpbmFsU2VjdGlvbiA/IHRoaXMuZGF0YXNldC5vcmlnaW5hbFNlY3Rpb24gOiB0aGlzLmRhdGFzZXQuc2VjdGlvbjtcbiAgICAgICAgICBpZiAoZXZlbnQuZGF0YS5zZWN0aW9uSWQgIT09IHNlY3Rpb25JZCkgcmV0dXJuO1xuICAgICAgICAgIHRoaXMudXBkYXRlUXVhbnRpdHlSdWxlcyhldmVudC5kYXRhLnNlY3Rpb25JZCwgZXZlbnQuZGF0YS5odG1sKTtcbiAgICAgICAgICB0aGlzLnNldFF1YW50aXR5Qm91bmRyaWVzKCk7XG4gICAgICAgIH0pO1xuICAgICAgfVxuXG4gICAgICBkaXNjb25uZWN0ZWRDYWxsYmFjaygpIHtcbiAgICAgICAgaWYgKHRoaXMuY2FydFVwZGF0ZVVuc3Vic2NyaWJlcikge1xuICAgICAgICAgIHRoaXMuY2FydFVwZGF0ZVVuc3Vic2NyaWJlcigpO1xuICAgICAgICB9XG4gICAgICAgIGlmICh0aGlzLnZhcmlhbnRDaGFuZ2VVbnN1YnNjcmliZXIpIHtcbiAgICAgICAgICB0aGlzLnZhcmlhbnRDaGFuZ2VVbnN1YnNjcmliZXIoKTtcbiAgICAgICAgfVxuICAgICAgfVxuXG4gICAgICBzZXRRdWFudGl0eUJvdW5kcmllcygpIHtcbiAgICAgICAgY29uc3QgZGF0YSA9IHtcbiAgICAgICAgICBjYXJ0UXVhbnRpdHk6IHRoaXMuaW5wdXQuZGF0YXNldC5jYXJ0UXVhbnRpdHkgPyBwYXJzZUludCh0aGlzLmlucHV0LmRhdGFzZXQuY2FydFF1YW50aXR5KSA6IDAsXG4gICAgICAgICAgbWluOiB0aGlzLmlucHV0LmRhdGFzZXQubWluID8gcGFyc2VJbnQodGhpcy5pbnB1dC5kYXRhc2V0Lm1pbikgOiAxLFxuICAgICAgICAgIG1heDogdGhpcy5pbnB1dC5kYXRhc2V0Lm1heCA/IHBhcnNlSW50KHRoaXMuaW5wdXQuZGF0YXNldC5tYXgpIDogbnVsbCxcbiAgICAgICAgICBzdGVwOiB0aGlzLmlucHV0LnN0ZXAgPyBwYXJzZUludCh0aGlzLmlucHV0LnN0ZXApIDogMSxcbiAgICAgICAgfTtcblxuICAgICAgICBsZXQgbWluID0gZGF0YS5taW47XG4gICAgICAgIGNvbnN0IG1heCA9IGRhdGEubWF4ID09PSBudWxsID8gZGF0YS5tYXggOiBkYXRhLm1heCAtIGRhdGEuY2FydFF1YW50aXR5O1xuICAgICAgICBpZiAobWF4ICE9PSBudWxsKSBtaW4gPSBNYXRoLm1pbihtaW4sIG1heCk7XG4gICAgICAgIGlmIChkYXRhLmNhcnRRdWFudGl0eSA+PSBkYXRhLm1pbikgbWluID0gTWF0aC5taW4obWluLCBkYXRhLnN0ZXApO1xuXG4gICAgICAgIHRoaXMuaW5wdXQubWluID0gbWluO1xuICAgICAgICB0aGlzLmlucHV0Lm1heCA9IG1heDtcbiAgICAgICAgdGhpcy5pbnB1dC52YWx1ZSA9IG1pbjtcbiAgICAgICAgcHVibGlzaChQVUJfU1VCX0VWRU5UUy5xdWFudGl0eVVwZGF0ZSwgdW5kZWZpbmVkKTtcbiAgICAgIH1cblxuICAgICAgZmV0Y2hRdWFudGl0eVJ1bGVzKCkge1xuICAgICAgICBpZiAoIXRoaXMuY3VycmVudFZhcmlhbnQgfHwgIXRoaXMuY3VycmVudFZhcmlhbnQudmFsdWUpIHJldHVybjtcbiAgICAgICAgdGhpcy5xdWVyeVNlbGVjdG9yKCcucXVhbnRpdHlfX3J1bGVzLWNhcnQgLmxvYWRpbmdfX3NwaW5uZXInKS5jbGFzc0xpc3QucmVtb3ZlKCdoaWRkZW4nKTtcbiAgICAgICAgZmV0Y2goYCR7dGhpcy5kYXRhc2V0LnVybH0/dmFyaWFudD0ke3RoaXMuY3VycmVudFZhcmlhbnQudmFsdWV9JnNlY3Rpb25faWQ9JHt0aGlzLmRhdGFzZXQuc2VjdGlvbn1gKVxuICAgICAgICAgIC50aGVuKChyZXNwb25zZSkgPT4ge1xuICAgICAgICAgICAgcmV0dXJuIHJlc3BvbnNlLnRleHQoKTtcbiAgICAgICAgICB9KVxuICAgICAgICAgIC50aGVuKChyZXNwb25zZVRleHQpID0+IHtcbiAgICAgICAgICAgIGNvbnN0IGh0bWwgPSBuZXcgRE9NUGFyc2VyKCkucGFyc2VGcm9tU3RyaW5nKHJlc3BvbnNlVGV4dCwgJ3RleHQvaHRtbCcpO1xuICAgICAgICAgICAgdGhpcy51cGRhdGVRdWFudGl0eVJ1bGVzKHRoaXMuZGF0YXNldC5zZWN0aW9uLCBodG1sKTtcbiAgICAgICAgICAgIHRoaXMuc2V0UXVhbnRpdHlCb3VuZHJpZXMoKTtcbiAgICAgICAgICB9KVxuICAgICAgICAgIC5jYXRjaCgoZSkgPT4ge1xuICAgICAgICAgICAgY29uc29sZS5lcnJvcihlKTtcbiAgICAgICAgICB9KVxuICAgICAgICAgIC5maW5hbGx5KCgpID0+IHtcbiAgICAgICAgICAgIHRoaXMucXVlcnlTZWxlY3RvcignLnF1YW50aXR5X19ydWxlcy1jYXJ0IC5sb2FkaW5nX19zcGlubmVyJykuY2xhc3NMaXN0LmFkZCgnaGlkZGVuJyk7XG4gICAgICAgICAgfSk7XG4gICAgICB9XG5cbiAgICAgIHVwZGF0ZVF1YW50aXR5UnVsZXMoc2VjdGlvbklkLCBodG1sKSB7XG4gICAgICAgIGNvbnN0IHF1YW50aXR5Rm9ybVVwZGF0ZWQgPSBodG1sLmdldEVsZW1lbnRCeUlkKGBRdWFudGl0eS1Gb3JtLSR7c2VjdGlvbklkfWApO1xuICAgICAgICBjb25zdCBzZWxlY3RvcnMgPSBbJy5xdWFudGl0eV9faW5wdXQnLCAnLnF1YW50aXR5X19ydWxlcycsICcucXVhbnRpdHlfX2xhYmVsJ107XG4gICAgICAgIGZvciAobGV0IHNlbGVjdG9yIG9mIHNlbGVjdG9ycykge1xuICAgICAgICAgIGNvbnN0IGN1cnJlbnQgPSB0aGlzLnF1YW50aXR5Rm9ybS5xdWVyeVNlbGVjdG9yKHNlbGVjdG9yKTtcbiAgICAgICAgICBjb25zdCB1cGRhdGVkID0gcXVhbnRpdHlGb3JtVXBkYXRlZC5xdWVyeVNlbGVjdG9yKHNlbGVjdG9yKTtcbiAgICAgICAgICBpZiAoIWN1cnJlbnQgfHwgIXVwZGF0ZWQpIGNvbnRpbnVlO1xuICAgICAgICAgIGlmIChzZWxlY3RvciA9PT0gJy5xdWFudGl0eV9faW5wdXQnKSB7XG4gICAgICAgICAgICBjb25zdCBhdHRyaWJ1dGVzID0gWydkYXRhLWNhcnQtcXVhbnRpdHknLCAnZGF0YS1taW4nLCAnZGF0YS1tYXgnLCAnc3RlcCddO1xuICAgICAgICAgICAgZm9yIChsZXQgYXR0cmlidXRlIG9mIGF0dHJpYnV0ZXMpIHtcbiAgICAgICAgICAgICAgY29uc3QgdmFsdWVVcGRhdGVkID0gdXBkYXRlZC5nZXRBdHRyaWJ1dGUoYXR0cmlidXRlKTtcbiAgICAgICAgICAgICAgaWYgKHZhbHVlVXBkYXRlZCAhPT0gbnVsbCkgY3VycmVudC5zZXRBdHRyaWJ1dGUoYXR0cmlidXRlLCB2YWx1ZVVwZGF0ZWQpO1xuICAgICAgICAgICAgfVxuICAgICAgICAgIH0gZWxzZSB7XG4gICAgICAgICAgICBjdXJyZW50LmlubmVySFRNTCA9IHVwZGF0ZWQuaW5uZXJIVE1MO1xuICAgICAgICAgIH1cbiAgICAgICAgfVxuICAgICAgfVxuICAgIH1cbiAgKTtcbn1cbiJdLCJuYW1lcyI6W10sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./src/js/components/product-info.js\n"
-        );
-
-        /***/
-      },
-
-    /******/
-  };
-  /************************************************************************/
-  /******/
-  /******/ // startup
-  /******/ // Load entry module and return exports
-  /******/ // This entry module can't be inlined because the eval-source-map devtool is used.
-  /******/ var __webpack_exports__ = {};
-  /******/ __webpack_modules__["./src/js/components/product-info.js"]();
-  /******/
-  /******/
-})();
+customElements.get("product-info") ||
+  customElements.define(
+    "product-info",
+    class extends HTMLElement {
+      constructor() {
+        super(),
+          (this.input = this.querySelector(".quantity__input")),
+          (this.currentVariant = this.querySelector(".product-variant-id")),
+          (this.submitButton = this.querySelector('[type="submit"]'));
+      }
+      cartUpdateUnsubscriber = void 0;
+      variantChangeUnsubscriber = void 0;
+      connectedCallback() {
+        this.input &&
+          ((this.quantityForm = this.querySelector(".product-form__quantity")),
+          this.quantityForm &&
+            (this.setQuantityBoundries(),
+            this.dataset.originalSection ||
+              (this.cartUpdateUnsubscriber = subscribe(
+                PUB_SUB_EVENTS.cartUpdate,
+                this.fetchQuantityRules.bind(this)
+              )),
+            (this.variantChangeUnsubscriber = subscribe(
+              PUB_SUB_EVENTS.variantChange,
+              (t) => {
+                const i = this.dataset.originalSection
+                  ? this.dataset.originalSection
+                  : this.dataset.section;
+                t.data.sectionId === i &&
+                  (this.updateQuantityRules(t.data.sectionId, t.data.html),
+                  this.setQuantityBoundries());
+              }
+            ))));
+      }
+      disconnectedCallback() {
+        this.cartUpdateUnsubscriber && this.cartUpdateUnsubscriber(),
+          this.variantChangeUnsubscriber && this.variantChangeUnsubscriber();
+      }
+      setQuantityBoundries() {
+        const t = {
+          cartQuantity: this.input.dataset.cartQuantity
+            ? parseInt(this.input.dataset.cartQuantity)
+            : 0,
+          min: this.input.dataset.min ? parseInt(this.input.dataset.min) : 1,
+          max: this.input.dataset.max ? parseInt(this.input.dataset.max) : null,
+          step: this.input.step ? parseInt(this.input.step) : 1,
+        };
+        let i = t.min;
+        const e = null === t.max ? t.max : t.max - t.cartQuantity;
+        null !== e && (i = Math.min(i, e)),
+          t.cartQuantity >= t.min && (i = Math.min(i, t.step)),
+          (this.input.min = i),
+          (this.input.max = e),
+          (this.input.value = i),
+          publish(PUB_SUB_EVENTS.quantityUpdate, void 0);
+      }
+      fetchQuantityRules() {
+        this.currentVariant &&
+          this.currentVariant.value &&
+          (this.querySelector(
+            ".quantity__rules-cart .loading__spinner"
+          ).classList.remove("hidden"),
+          fetch(
+            `${this.dataset.url}?variant=${this.currentVariant.value}&section_id=${this.dataset.section}`
+          )
+            .then((t) => t.text())
+            .then((t) => {
+              const i = new DOMParser().parseFromString(t, "text/html");
+              this.updateQuantityRules(this.dataset.section, i),
+                this.setQuantityBoundries();
+            })
+            .catch((t) => {
+              console.error(t);
+            })
+            .finally(() => {
+              this.querySelector(
+                ".quantity__rules-cart .loading__spinner"
+              ).classList.add("hidden");
+            }));
+      }
+      updateQuantityRules(t, i) {
+        const e = i.getElementById(`Quantity-Form-${t}`),
+          a = [".quantity__input", ".quantity__rules", ".quantity__label"];
+        for (let t of a) {
+          const i = this.quantityForm.querySelector(t),
+            a = e.querySelector(t);
+          if (i && a)
+            if (".quantity__input" === t) {
+              const t = ["data-cart-quantity", "data-min", "data-max", "step"];
+              for (let e of t) {
+                const t = a.getAttribute(e);
+                null !== t && i.setAttribute(e, t);
+              }
+            } else i.innerHTML = a.innerHTML;
+        }
+      }
+    }
+  );
